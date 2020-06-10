@@ -1,24 +1,21 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { useContext } from 'react';
+import { GameContext } from './Hooks/GameContext';
+import Board from './Components/Board/Board';
+import Picker from './Components/Picker/Picker';
+import ToolBar from './Components/ToolBar/ToolBar';
 import './App.css';
 
 function App() {
+  const gameContext = useContext(GameContext);
+  const { picker, win } = gameContext;
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <div className={win === 1 ? "inner wingrid" : "inner"}>
+        <ToolBar />
+        {win === 1 ? <div className="win">You Won!</div> : ""}
+        <Board />
+        {picker ? <Picker /> : ""}
+      </div>
     </div>
   );
 }
