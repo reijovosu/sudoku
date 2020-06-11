@@ -1,0 +1,27 @@
+.Board {
+    display: grid;
+    grid-template-columns: repeat(9, 1fr);
+    grid-template-rows: repeat(9, 1fr);
+    justify-self: center;
+    align-self: center;
+}
+
+.Board > div{
+    border: 1px solid #CCC;
+}
+
+.Board > div:nth-child(3n) {  
+    border-right: 2px solid #CCC;
+}
+
+.Board > div:nth-child(27n + 1),
+.Board > div:nth-child(27n + 2),
+.Board > div:nth-child(27n + 3),
+.Board > div:nth-child(27n + 4),
+.Board > div:nth-child(27n + 5),
+.Board > div:nth-child(27n + 6),
+.Board > div:nth-child(27n + 7),
+.Board > div:nth-child(27n + 8),
+.Board > div:nth-child(27n + 9) {  
+    border-top: 2px solid #CCC;
+}
