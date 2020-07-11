@@ -5,7 +5,8 @@ import styles from './Cell.module.css';
 const Cell = ({ index }) => {
 
   const gameContext = useContext(GameContext);
-  const { board, showPicker, invalidKeys, win } = gameContext;
+  const { board, fixed, showPicker, invalidKeys, win } = gameContext;
+  const isFixed = fixed[index[0]][index[1]];
 
   const buildCell = () => {
     if (board[index[0]][index[1]].length === 1) {
@@ -27,7 +28,8 @@ const Cell = ({ index }) => {
   const getClassName = () => {
     let className = [styles.Cell];
     className.push(board[index[0]][index[1]].length <= 1 ? [styles.one] : [styles.many]);
-    if (invalidKeys.indexOf([index[0], [index[1]]].join(",")) > -1) {
+    className.push(isFixed && [styles.fixed]);
+    if ((invalidKeys.indexOf([index[0], [index[1]]].join(",")) > -1) && (!isFixed)) {
       className.push(styles.error);
     }
 
@@ -36,7 +38,7 @@ const Cell = ({ index }) => {
 
   return (
 
-    <div className={getClassName()} onClick={win === 0 ? (e) => showPicker(true, index, e) : () => true}>
+    <div className={getClassName()} onClick={win === 0 && !isFixed ? (e) => showPicker(true, index, e) : () => true}>
       {buildCell()}
     </div >
   )

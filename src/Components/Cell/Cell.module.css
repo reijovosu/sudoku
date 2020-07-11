@@ -9,6 +9,10 @@
     background-color: #DDDDDD;
 }
 
+.fixed{
+    font-weight: bold;
+}
+
 .one{
     line-height: 30px;
 }

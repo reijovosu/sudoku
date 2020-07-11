@@ -22,6 +22,18 @@ const GameProvider = (props) => {
         [[], [], [], [], [], [], [], [], []],
     ]);
 
+    const [fixed, setFixed] = useState(
+        [false, false, false, false, false, false, false, false, false],
+        [false, false, false, false, false, false, false, false, false],
+        [false, false, false, false, false, false, false, false, false],
+        [false, false, false, false, false, false, false, false, false],
+        [false, false, false, false, false, false, false, false, false],
+        [false, false, false, false, false, false, false, false, false],
+        [false, false, false, false, false, false, false, false, false],
+        [false, false, false, false, false, false, false, false, false],
+        [false, false, false, false, false, false, false, false, false]
+    );
+
     const [sum, setSum] = useState(0);
     const [invalidKeys, setInvalidKeys] = useState([]);
     const [win, setWin] = useState(0);
@@ -31,12 +43,20 @@ const GameProvider = (props) => {
         () => {
             const [ik, s] = Validate(board);
             setSum(s);
-            setInvalidKeys(invalidKeys => ik);
+            setInvalidKeys(ik);
         }, [board]
     );
 
     const generateBoard = () => {
-        setBoard(Generate(81 - difficulty));
+        const newBoard = Generate(81 - difficulty);
+        setBoard(newBoard);
+        setFixed(
+            () => newBoard.map(
+                (r) => r.map(
+                    (v) => v.length > 0 ? true : false
+                )
+            )
+        );
         setWin(0);
     }
 
@@ -74,6 +94,7 @@ const GameProvider = (props) => {
         <GameContext.Provider value={
             {
                 board,
+                fixed,
                 showPicker,
                 picker,
                 pickerPos,
