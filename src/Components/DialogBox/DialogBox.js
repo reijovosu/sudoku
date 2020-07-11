@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import { GameContext } from '../../Hooks/GameContext.js';
-import './DialogBox.css';
+import styles from './DialogBox.module.css';
 import reload from "./reload.svg";
 import close from "./close.svg";
 
@@ -11,12 +11,12 @@ const DialogBox = ({ setShow }) => {
   const { generateBoard, difficulty, setDifficulty } = gameContext;
 
   return (
-    <div className="DialogBox">
-      <div className="shim" onClick={() => setShow(false)}></div>
-      <div className="inner">
-        <img src={close} alt="Close" onClick={() => setShow(false)} className="close" />
+    <div className={styles.DialogBox}>
+      <div className={styles.shim} onClick={() => setShow(false)}></div>
+      <div className={styles.inner}>
+        <img src={close} alt="Close" onClick={() => setShow(false)} className={styles.close} />
 
-        <div className="radios">
+        <div className={styles.radios}>
           {/* <input type="radio" value="80" name="dif" id="test" checked={difficulty === 80 ? "checked" : ""} onChange={() => setDifficulty(80)} />
           <label htmlFor="test">Test</label> */}
 
@@ -38,7 +38,7 @@ const DialogBox = ({ setShow }) => {
           <input type="radio" value="17" name="dif" id="inhuman" checked={difficulty === 17 ? "checked" : ""} onChange={() => setDifficulty(17)} />
           <label htmlFor="inhuman">Inhuman</label>
         </div>
-        <img src={reload} alt="Reload" onClick={() => { generateBoard(); setShow(false); }} className="reload" />
+        <img src={reload} alt="Reload" onClick={() => { generateBoard(); setShow(false); }} className={styles.reload} />
       </div>
     </div>)
 };

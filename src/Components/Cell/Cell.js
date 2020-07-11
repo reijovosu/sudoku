@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import { GameContext } from '../../Hooks/GameContext.js';
-import './Cell.css';
+import styles from './Cell.module.css';
 
 const Cell = ({ index }) => {
 
@@ -12,11 +12,12 @@ const Cell = ({ index }) => {
       return board[index[0]][index[1]][0];
     } else if (board[index[0]][index[1]].length > 1) {
       return board[index[0]][index[1]].map((i, k) => {
-        let className = "";
+        let className = [styles.smallCell];
+
         if (invalidKeys.indexOf([index[0], [index[1], k]].join(",")) > -1) {
-          className = "error";
+          className.push(styles.error);
         }
-        return <div className={className} key={`_${index[0]}_${index[1]}_${k}`}>{i}</div>
+        return <div className={className.join(' ')} key={`_${index[0]}_${index[1]}_${k}`}>{i}</div>
       });
     }
 
@@ -24,12 +25,13 @@ const Cell = ({ index }) => {
   }
 
   const getClassName = () => {
-    let className = board[index[0]][index[1]].length <= 1 ? "Cell one" : "Cell many";
+    let className = [styles.Cell];
+    className.push(board[index[0]][index[1]].length <= 1 ? [styles.one] : [styles.many]);
     if (invalidKeys.indexOf([index[0], [index[1]]].join(",")) > -1) {
-      className += " error";
+      className.push(styles.error);
     }
 
-    return className;
+    return className.join(' ');
   }
 
   return (
